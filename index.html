@@ -10,7 +10,7 @@
 </head>
 <body ng-controller="ShoppingListCtrl">
     <div class="container">
-        <h1>Survata shopping list</h1> This:{{ listItems}}
+        <h1>Survata shopping list</h1>
 
         <table class="table table-striped">
             <thead>
@@ -21,29 +21,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Eggs</td>
-                    <td>Dairy</td>
-                    <td><button class="btn btn-xs btn-danger delete-btn"><i class="fa fa-trash"></i> Delete</button></td>
-                </tr>
-                 <tr>
-                    <td>Milk</td>
-                    <td>Dairy</td>
-                    <td><button class="btn btn-xs btn-danger delete-btn"><i class="fa fa-trash"></i> Delete</button></td>
-                </tr>
-                 <tr>
-                    <td>Cheese</td>
-                    <td>Dairy</td>
-                    <td><button class="btn btn-xs btn-danger delete-btn"><i class="fa fa-trash"></i> Delete</button></td>
-                </tr>
-                <tr>
-                    <td>Pork</td>
-                    <td>Meat</td>
-                    <td><button class="btn btn-xs btn-danger delete-btn"><i class="fa fa-trash"></i> Delete</button></td>
-                </tr>
-                <tr>
-                    <td>Beer</td>
-                    <td>Beverage</td>
+                <tr ng-repeat="item in listItems">
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.type }}</td>
                     <td><button class="btn btn-xs btn-danger delete-btn"><i class="fa fa-trash"></i> Delete</button></td>
                 </tr>
 
