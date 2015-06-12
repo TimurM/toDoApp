@@ -12,7 +12,8 @@
     <div class="container">
         <h1>Survata shopping list</h1>
 
-        Filter: <input type="text" ng-model="itemFilter" />
+        <label>Search: <input type="text" lass="form-control" placeholder="Type name or category" ng-model="itemFilter" />
+        </label>
         <a href="#" ng-click="listAllItems()">refresh</a>
         <table class="table table-striped">
             <thead>
