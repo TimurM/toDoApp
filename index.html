@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en-us" ng-app="ShoppingListApp">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Survata Shopping!</title>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body ng-controller="ShoppingListCtrl">
+    <div class="container">
+        <h1>Survata shopping list</h1> This:{{ listItems}}
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th><a href="#">Item</a></th>
+                    <th><a href="#">Category</a></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Eggs</td>
+                    <td>Dairy</td>
+                    <td><button class="btn btn-xs btn-danger delete-btn"><i class="fa fa-trash"></i> Delete</button></td>
+                </tr>
+                 <tr>
+                    <td>Milk</td>
+                    <td>Dairy</td>
+                    <td><button class="btn btn-xs btn-danger delete-btn"><i class="fa fa-trash"></i> Delete</button></td>
+                </tr>
+                 <tr>
+                    <td>Cheese</td>
+                    <td>Dairy</td>
+                    <td><button class="btn btn-xs btn-danger delete-btn"><i class="fa fa-trash"></i> Delete</button></td>
+                </tr>
+                <tr>
+                    <td>Pork</td>
+                    <td>Meat</td>
+                    <td><button class="btn btn-xs btn-danger delete-btn"><i class="fa fa-trash"></i> Delete</button></td>
+                </tr>
+                <tr>
+                    <td>Beer</td>
+                    <td>Beverage</td>
+                    <td><button class="btn btn-xs btn-danger delete-btn"><i class="fa fa-trash"></i> Delete</button></td>
+                </tr>
+
+                <tr>
+                    <td><input type="text" class="form-control" placeholder="New list item"></td>
+                    <td>
+                        <select>
+                            <option>Dairy</option>
+                            <option>Meat</option>
+                            <option>Beverage</option>
+                            <option>Other</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-default">
+                            <i class="fa fa-plus"></i> Add item
+                        </button>
+                    </td>
+            </tbody>
+        </table>
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
