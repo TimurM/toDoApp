@@ -11,24 +11,24 @@
 <body ng-controller="ShoppingListCtrl">
     <div class="container">
         <h1>Survata shopping list</h1>
-
+        Filter: <input type="text" ng-model="itemFilter" />
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th><a href="#">Item</a></th>
-                    <th><a href="#">Category</a></th>
-                    <th></th>
+                    <th ng-click="doSort('name')">Item</th>
+                    <th ng-click="doSort('type')">Category</th>
+                    <th>&nbsp;</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in listItems">
+                <tr ng-repeat="item in listItems | filter:itemFilter | orderBy:sortBy:reverse">
                     <td>{{ item.name }}</td>
                     <td>{{ item.type }}</td>
                     <td><button class="btn btn-xs btn-danger delete-btn" ng-click="deleteItem($index)"><i class="fa fa-trash"></i> Delete</button></td>
                 </tr>
 
                 <tr>
-                    <td><input type="text" class="form-control" placeholder="New list item"></td>
+                    <!-- td><input type="text" class="form-control" placeholder="New list item"></td>
                     <td>
                         <select>
                             <option>Dairy</option>
@@ -41,7 +41,23 @@
                         <button class="btn btn-sm btn-default">
                             <i class="fa fa-plus"></i> Add item
                         </button>
-                    </td>
+                    </td> -->
+                    <form ng-submit="addItem()">
+                        <td><input type="text" class="form-control" placeholder="New list item" ng-model="itemName" required></td>
+                        <td><select ng-model="itemType" required>
+                            <option value="Dairy">Dairy</option>
+                            <option value="Meat">Meat</option>
+                            <option value="Beverage">Beverage</option>
+                            <option value="Other">Other</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button type="submit" class="btn btn-sm btn-default">
+                                <i class="fa fa-plus"></i> Add item
+                            </button>
+                        </td>
+                    </form>
+                </tr>
             </tbody>
         </table>
     </div>

@@ -16,8 +16,8 @@
             return items;
         };
 
-        var addItem = function() {
-
+        var addItem = function(item) {
+            items += item;
         };
 
         var removeItem = function() {
@@ -35,7 +35,14 @@
 
     .controller('ShoppingListCtrl', ['$scope', '$log', '$shoppingService', function($scope, $log, $shoppingService) {
          $scope.listItems = null;
+         $scope.sortBy = 'name';
+         $scope.reverse = false;
 
+        $scope.doSort = function(propName) {
+           $scope.sortBy = propName;
+           $scope.reverse = !$scope.reverse;
+        };
+        
         $scope.init = function() {
             var promise = $shoppingService.retrieveItems();
             
@@ -55,6 +62,19 @@
         $scope.deleteItem = function(start) {
             $scope.listItems.splice(start, 1);
         };
+
+        $scope.addItem = function() {
+            var item = {
+                name: $scope.itemName,
+                type: $scope.itemType
+            }
+
+            $scope.listItems.push(item);
+            $scope.itemName = "";
+            $scope.itemType = "";
+
+            $shoppingService.addItem(item);
+        }
 
         $scope.init();
     }]);
