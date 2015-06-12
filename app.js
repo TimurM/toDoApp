@@ -48,6 +48,8 @@
          $scope.listItems = null;
          $scope.sortBy = 'name';
          $scope.reverse = false;
+         $scope.currentPage = 1;
+         $scope.pageSize = 10;
 
         $scope.doSort = function(propName) {
            $scope.sortBy = propName;
