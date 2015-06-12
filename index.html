@@ -24,7 +24,7 @@
                 <tr ng-repeat="item in listItems">
                     <td>{{ item.name }}</td>
                     <td>{{ item.type }}</td>
-                    <td><button class="btn btn-xs btn-danger delete-btn"><i class="fa fa-trash"></i> Delete</button></td>
+                    <td><button class="btn btn-xs btn-danger delete-btn" ng-click="deleteItem($index)"><i class="fa fa-trash"></i> Delete</button></td>
                 </tr>
 
                 <tr>

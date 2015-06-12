@@ -50,7 +50,11 @@
         $scope.listItems = function() {
             // $scope.listItems = $shoppingService.listItems; 
             // console.log($scope.listItems);
-        }
+        };
+
+        $scope.deleteItem = function(start) {
+            $scope.listItems.splice(start, 1);
+        };
 
         $scope.init();
     }]);
