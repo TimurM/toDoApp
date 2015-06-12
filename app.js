@@ -32,8 +32,14 @@
             items.push(item);
         };
 
-        var removeItem = function(start) {
-            items.splice(start, 1);
+        var removeItem = function(item) {
+            for(var i=0; i<items.length; i++){
+                var tempItem = items[i];
+                // console.log(tempItem);
+                if(item.name === tempItem.name && item.type === tempItem.type) {
+                    items.splice(i, 1);
+                }
+            }
         };
 
         return {
@@ -71,8 +77,8 @@
             updateScope($shoppingService.listItems); 
         };
 
-        $scope.deleteItem = function(start) {
-            $shoppingService.removeItem(start)
+        $scope.deleteItem = function(item) {
+            $shoppingService.removeItem(item)
             updateScope($shoppingService.listItems)
         };
 

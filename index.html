@@ -26,7 +26,7 @@
                 <tr dir-paginate="item in listItems | itemsPerPage: pageSize | filter:itemFilter | orderBy:sortBy:reverse" current-page="currentPage">
                     <td>{{ item.name }}</td>
                     <td>{{ item.type }}</td>
-                    <td><button class="btn btn-xs btn-danger delete-btn" ng-click="deleteItem($index)"><i class="fa fa-trash"></i> Delete</button></td>
+                    <td><button class="btn btn-xs btn-danger delete-btn" ng-click="deleteItem(item)"><i class="fa fa-trash"></i> Delete</button></td>
                 </tr>
 
                 <tr>
@@ -48,7 +48,7 @@
                 </tr>
             </tbody>
         </table>
-        
+
         <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="views/dirPagination.tpl.html">
         </dir-pagination-controls>
     </div>
