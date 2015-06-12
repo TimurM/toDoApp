@@ -11,7 +11,22 @@
 <body ng-controller="ShoppingListCtrl">
     <div class="container">
         <h1>Survata shopping list</h1>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+              <ul>
+                <li dir-paginate="item in items | itemsPerPage: pageSize" current-page="currentPage">{{ item }}</li>
+                
+              </ul>
+            </div>
+        </div>
+
+        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="views/dirPagination.tpl.html"></dir-pagination-controls>
+
+
         Filter: <input type="text" ng-model="itemFilter" />
+        <a href="#" ng-click="listAllItems()">refresh</a>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -28,20 +43,6 @@
                 </tr>
 
                 <tr>
-                    <!-- td><input type="text" class="form-control" placeholder="New list item"></td>
-                    <td>
-                        <select>
-                            <option>Dairy</option>
-                            <option>Meat</option>
-                            <option>Beverage</option>
-                            <option>Other</option>
-                        </select>
-                    </td>
-                    <td>
-                        <button class="btn btn-sm btn-default">
-                            <i class="fa fa-plus"></i> Add item
-                        </button>
-                    </td> -->
                     <form ng-submit="addItem()">
                         <td><input type="text" class="form-control" placeholder="New list item" ng-model="itemName" required></td>
                         <td><select ng-model="itemType" required>
@@ -61,7 +62,9 @@
             </tbody>
         </table>
     </div>
+
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="dirPagination.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

@@ -1,35 +1,46 @@
 (function() {
     'use strict';
 
-    angular.module('ShoppingListApp', [])
+    angular.module('ShoppingListApp', ['angularUtils.directives.dirPagination'])
 
     .service('$shoppingService', ['$http', '$q', function($http, $q) {
-        var itemTypes = ['Dairy', 'Meat', 'Beverage', 'Other'];
+        
         var items; 
 
         var retrieveItems = function() {
-            return $http.get('http://demo3374525.mockable.io/shopping-list');
+            if (typeof(items) === 'undefined') {
+                var serviceItems = $http.get('http://demo3374525.mockable.io/shopping-list');
+                serviceItems.then(function(response){
+                    items = response.data;
+                })
+                return serviceItems;
+            } 
         };
         // mock REST endpoint for listing items
         // http://demo3374525.mockable.io/shopping-list
         var listItems = function() {
-            return items;
+            return itemsAsync(items);
+        };
+
+        function itemsAsync(value) {
+            var deferred = $q.defer(); 
+            deferred.resolve(value)
+            return deferred.promise
         };
 
         var addItem = function(item) {
-            items += item;
+            items.push(item);
         };
 
-        var removeItem = function() {
-
+        var removeItem = function(start) {
+            items.splice(start, 1);
         };
 
         return {
             retrieveItems: retrieveItems,
             listItems: listItems,
             addItem: addItem,
-            removeItem: removeItem,
-            itemTypes: itemTypes
+            removeItem: removeItem
         };
     }])
 
@@ -42,7 +53,7 @@
            $scope.sortBy = propName;
            $scope.reverse = !$scope.reverse;
         };
-        
+
         $scope.init = function() {
             var promise = $shoppingService.retrieveItems();
             
@@ -54,26 +65,35 @@
             }
         };
 
-        $scope.listItems = function() {
-            // $scope.listItems = $shoppingService.listItems; 
-            // console.log($scope.listItems);
+        $scope.listAllItems = function() {
+            updateScope($shoppingService.listItems); 
         };
 
         $scope.deleteItem = function(start) {
-            $scope.listItems.splice(start, 1);
+            $shoppingService.removeItem(start)
+            updateScope($shoppingService.listItems)
         };
+
 
         $scope.addItem = function() {
             var item = {
                 name: $scope.itemName,
                 type: $scope.itemType
             }
-
-            $scope.listItems.push(item);
-            $scope.itemName = "";
-            $scope.itemType = "";
-
+            
             $shoppingService.addItem(item);
+            updateScope($shoppingService.listItems)
+        }
+
+        function updateScope(functionName) {
+            var promise = functionName();
+    
+            promise.then(function(payload) {
+                $scope.listItems = payload;
+            }), 
+            function(errorPayload) {
+                $log.error("failure to load list", errorPayload);
+            }
         }
 
         $scope.init();
